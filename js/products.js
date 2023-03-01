@@ -12,7 +12,7 @@ const app = {
 			apiUrl: 'https://vue3-course-api.hexschool.io/v2',
 			api_path: 'blacknwhiterabbit',
 			temp:{
-					imagesUrl:[]
+				imagesUrl:[]
 			},
 			products:[],
 			isNew:false,
@@ -37,7 +37,7 @@ const app = {
 		},
 		getProductsData(){
 			this.getToken();
-			axios.get(`${this.apiUrl}/api/${this.api_path}/admin/products/all`)
+			axios.get(`${this.apiUrl}/api/${this.api_path}/admin/products`)
 				.then(res=>{
 					this.products = res.data.products;
 				})
@@ -59,7 +59,7 @@ const app = {
 			axios[http](url, { data: this.temp }).then((response) => {
 				alert(response.data.message);
 				productModal.hide();
-				this.getData();
+				this.getProductsData();
 				}).catch((err) => {
 					alert(err.response.data.message);
 			})
@@ -72,7 +72,7 @@ const app = {
 				.then((response) => {
 				alert(response.data.message);
 				delProductModal.hide();
-				this.getData();
+				this.getProductsData();
 				})
 				.catch((err) => {
 				alert(err.response.data.message);
@@ -81,7 +81,7 @@ const app = {
 		openModal(isNew,item){
 			if(isNew === "new"){
 				this.temp ={
-						imagesUrl:[]
+					imagesUrl:[]
 				}
 				this.isNew = true;
 				productModal.show();
